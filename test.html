@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba con Fetch</title>
+    <link href="estilo.css" rel="stylesheet">
+    
+    <!-- Pequeña hoja de estilos para dar formato-->
+    <script>
+        const url="http://api.openweathermap.org/data/2.5/weather?q=Canelones,uy&APPID=d4938142493ae0d78631642fc8ff739f"; 
+        //dirección de la API. Puede ser la ruta a un archivo json. CREA LA TUYA.
+
+        fetch(url) //Realizamos el fetch que devolverá una promesa
+            .then( respuesta=>respuesta.json())
+             //Obtenemos una promesa que trataremos como json
+            .then(datos=> { //obtenemos una nueva promesa, pero los datos ya están como json.
+                document.getElementById('ciudad').innerHTML= datos.name + ", " + datos.sys.country; //escribo los datos del país
+                document.getElementById('temp').innerHTML=(datos.main.temp -273.15).toFixed(1) + "º";//escribo la temperatura. la convierto de kelvin a celsius
+                document.getElementById('imagen').src="http://openweathermap.org/img/wn/"+ datos.weather[0].icon +".png" //imagen}
+                document.getElementById('humidity').innerHTML= "Humedad: " + datos.main.humidity + "%";
+                document.getElementById('termica').innerHTML="Sensación termica: " + (datos.main.feels_like - 283.52).toFixed(1) + "º" ;
+                document.getElementById('velocidad').innerHTML= "Velocidad del viento: " + datos.wind.speed + "m/s"
+            
+            })
+            
+            .catch( error => alert("Hubo un error: " + error));
+    </script>
+</head>
+<body>
+    <h1>Clima del Uruguay</h1>
+    
+    <div>
+        <span id="ciudad"></span><br>
+        <span id="temp"> </span>
+        <img id="imagen" src=""><br>
+        <br>
+        <span id="humidity"></span><br>
+        <span id="termica"></span><br>
+        <span id="velocidad"></span><br>
+    
+    </div>
+    <br>
+    
+    <br>
+    <p>El clima de Uruguay pertenece casi en su totalidad al clima subtropical húmedo (Cfa), también conocido como pampeano, a excepción de una franja muy pequeña de clima oceánico (Cfb) en el sudeste. Por encontrarse al sur del Trópico de Capricornio y al norte del Círculo Polar Antártico. todo el territorio corresponde a la zona de clima templado (Cf).
+
+        El clima oceánico, atlántico o semi húmedo, está ubicado sobre las zonas costeras del Océano Atlántico, al sudeste del país y se debe a la influencia proveniente del Océano Atlántico y del Río de la Plata. Afecta los departamentos de Maldonado, Rocha y sudeste de Canelones.</p>
+        
+        <img id="imagenn" src="https://www.visualavi.com/wp-content/uploads/2017/12/estaciones-2.jpg">
+        <section class="estacioneess">
+            <img id="panda" src="https://previews.123rf.com/images/margaritavasina/margaritavasina1710/margaritavasina171000009/88320568-caricatura-linda-panda-bear-character-y-las-cuatro-estaciones-invierno-primavera-verano-y-oto%C3%B1o-ilustra.jpg" alt="">
+        <p>En Uruguay predominan formas de relieve bajas, constituidas por llanuras, lomadas, colinas y cerros. Estas no representan un obstáculo orográfico para la libre circulación de las masas de aire. Es decir que estas ingresan a territorio uruguayo generando muy frecuentes cambios en los estados del tiempo.
+
+            Por otra parte, el relieve bajo permite una distribución bastante homogénea de las temperaturas y las precipitaciones, ya que no se producen lluvias orográficas.</p>
+        </section>
+        </body>
+
+</html>
